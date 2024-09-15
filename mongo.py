@@ -59,7 +59,7 @@ arr_text=['Ошибка 1','Предупреждение 2','Внимание 1'
 arr_event=['Событие 1','Событие 2','Событие 3','Событие 4','Событие 5','Событие 6','Событие 7','Событие 8','Событие 9','Событие 10']
 
 
-if (argv[1] == '17'):
+if (argv[1] == '17' and argv[2] == 'once'):
 
   arr = count_17k()
   client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
@@ -76,9 +76,33 @@ if (argv[1] == '17'):
   elapsed_time = end_time - start_time
   print('Elapsed time: ', elapsed_time)
 
+if (argv[1] == '17' and argv[2] == 'many'):
+
+  arr = count_17k()
+  docs = []
+  count = 0
+  client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
+
+  start_time = time.time()
+  db = client['my_base']
+  collection = db.log_table
+
+  for times in arr:
+    post = {'date': "'" + times + "'", 'event': "'" + arr_event[random.randrange(0, 10)] + "'", 'text': "'" + arr_text[random.randrange(0, 10)] + "'" }
+    docs.append(post)
+    count+=1
+    if (count == 12):
+      collection.insert_many(docs)
+      docs = []
+      count = 0
+
+  end_time = time.time()
+  elapsed_time = end_time - start_time
+  print('Elapsed time: ', elapsed_time)
 
 
-if (argv[1] == '86'):
+
+if (argv[1] == '86' and argv[2] == 'once'):
 
   arr = count_86k()
   client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
@@ -95,8 +119,32 @@ if (argv[1] == '86'):
   elapsed_time = end_time - start_time
   print('Elapsed time: ', elapsed_time)
 
+if (argv[1] == '86' and argv[2] == 'many'):
 
-if (argv[1] == '170'):
+  arr = count_86k()
+  docs = []
+  count = 0
+  client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
+
+  start_time = time.time()
+  db = client['my_base']
+  collection = db.log_table
+
+  for times in arr:
+    post = {'date': "'" + times + "'", 'event': "'" + arr_event[random.randrange(0, 10)] + "'", 'text': "'" + arr_text[random.randrange(0, 10)] + "'" }
+    docs.append(post)
+    count+=1
+    if (count == 12):
+      collection.insert_many(docs)
+      docs = []
+      count = 0
+
+  end_time = time.time()
+  elapsed_time = end_time - start_time
+  print('Elapsed time: ', elapsed_time)
+
+
+if (argv[1] == '170' and argv[2] == 'once'):
 
   arr = count_170k()
   client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
@@ -113,8 +161,33 @@ if (argv[1] == '170'):
   elapsed_time = end_time - start_time
   print('Elapsed time: ', elapsed_time)
 
+if (argv[1] == '170' and argv[2] == 'many'):
 
-if (argv[1] == '500'):
+  arr = count_170k()
+  docs = []
+  count = 0
+  client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
+
+  start_time = time.time()
+  db = client['my_base']
+  collection = db.log_table
+
+  for times in arr:
+    post = {'date': "'" + times + "'", 'event': "'" + arr_event[random.randrange(0, 10)] + "'", 'text': "'" + arr_text[random.randrange(0, 10)] + "'" }
+    docs.append(post)
+    count+=1
+    if (count == 12):
+      collection.insert_many(docs)
+      docs = []
+      count = 0
+
+  end_time = time.time()
+  elapsed_time = end_time - start_time
+  print('Elapsed time: ', elapsed_time)
+
+
+
+if (argv[1] == '500' and argv[2] == 'once'):
 
   arr = count_500k()
   client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
@@ -126,6 +199,30 @@ if (argv[1] == '500'):
   for times in arr:
     post = {'date': "'" + times + "'", 'event': "'" + arr_event[random.randrange(0, 10)] + "'", 'text': "'" + arr_text[random.randrange(0, 10)] + "'" }
     collection.insert_one(post)
+
+  end_time = time.time()
+  elapsed_time = end_time - start_time
+  print('Elapsed time: ', elapsed_time)
+
+if (argv[1] == '500' and argv[2] == 'many'):
+
+  arr = count_500k()
+  docs = []
+  count = 0
+  client = MongoClient('mongodb://192.168.50.118:27017,192.168.50.119:27017,192.168.50.120:27017/?replicaSet=cluster')
+
+  start_time = time.time()
+  db = client['my_base']
+  collection = db.log_table
+
+  for times in arr:
+    post = {'date': "'" + times + "'", 'event': "'" + arr_event[random.randrange(0, 10)] + "'", 'text': "'" + arr_text[random.randrange(0, 10)] + "'" }
+    docs.append(post)
+    count+=1
+    if (count == 12):
+      collection.insert_many(docs)
+      docs = []
+      count = 0
 
   end_time = time.time()
   elapsed_time = end_time - start_time
